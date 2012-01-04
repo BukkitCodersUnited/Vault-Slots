@@ -1,0 +1,14 @@
+# default config.yml
+type:
+  default:
+    labels: A:B:C:D
+    payout: '266:8'
+    jackpot: '266:16'
+    jackpotLabel: D
+    cost: '265:2'
+  default2:
+    labels: A:B:C:D
+    payout: '$40'
+    jackpot: '$400'
+    jackpotLabel: D
+    cost: '$10'
