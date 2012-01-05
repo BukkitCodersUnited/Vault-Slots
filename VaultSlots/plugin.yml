@@ -19,19 +19,15 @@ permissions:
             vaultslots.roll: true
             vaultslots.access: true
             vaultslots.build: true
-            vaultslots.card: true
     vaultslots.test:
         description: Allows for Test Command.
         default: op
     vaultslots.roll:
         description: Allows for Roll Command.
-        default: true
+        default: op
     vaultslots.access:
         description: Allows for Using Slots.
-        default: true
+        default: op
     vaultslots.build:
         description: Allows for Building Slots.
         default: op
-    vaultslots.card:
-        description: Allows to randomly pick a card.
-        default: true
