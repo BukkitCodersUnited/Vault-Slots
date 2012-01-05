@@ -53,9 +53,21 @@ public class CommandEx implements CommandExecutor{
                 	}
                 } else if(cmd.equalsIgnoreCase("card")) {
                 	if(perm.playerHas(player, "vaultslots.card")) {
-                		player.sendMessage(deck.drawCard());
+                		player.sendMessage(ChatColor.GOLD + deck.drawCard());
+                		return true;
+                	} else {
+                		sender.sendMessage(ChatColor.RED + "[VaultSlots]: You Do Not Have Permission for That");
+            			return true;
                 	}
-                }
+                } else if(cmd.equalsIgnoreCase("blackjack")) {
+					if(perm.playerHas(player, "vaultslots.blackjack.access")) {
+						player.sendMessage(ChatColor.GOLD + deck.BlackJack(player));
+						return true;
+					} else {
+						player.sendMessage(ChatColor.RED + "Sorry, no Help page Avaiable.");
+						return true;
+					}
+			}
 			} else if(args.length == 2) {
 				String cmd = args[0].toString();
 				String arg = args[1].toString();
@@ -80,7 +92,6 @@ public class CommandEx implements CommandExecutor{
 								return true;
 							}
 					}
-					return false;
 			} else {
 				sender.sendMessage(ChatColor.RED + "[VaultSlots] expected a command");
 				sender.sendMessage(ChatColor.RED + "[VaultSlots] Use /slots help to see Commands and Sign Format.");

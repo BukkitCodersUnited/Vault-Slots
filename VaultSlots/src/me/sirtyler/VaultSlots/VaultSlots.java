@@ -41,7 +41,6 @@ public class VaultSlots extends JavaPlugin{
 		PluginDescriptionFile pdfFile = this.getDescription();
 		setupPermissions();
 		setupEconomy();
-		this.logger.info("[" + pdfFile.getName() + "] using " + permission.getName() + " and " + economy.getName());
 		pm.registerEvent(Event.Type.SIGN_CHANGE, this.signchanger, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_INTERACT, this.interact, Event.Priority.Highest, this);
 		checkConfig();
