@@ -12,10 +12,12 @@ import org.bukkit.entity.Player;
 
 public class CommandEx implements CommandExecutor{
 	public static VaultSlots plugin;
+	private static Deck deck;
 	private static Permission perm;
 	Random rand = new Random();
 	public CommandEx(VaultSlots instance) {
 		plugin = instance;
+		deck = instance.deck;
 	}
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -48,6 +50,10 @@ public class CommandEx implements CommandExecutor{
                 	} else {
             			sender.sendMessage(ChatColor.RED + "[VaultSlots]: You Do Not Have Permission for That");
             			return true;
+                	}
+                } else if(cmd.equalsIgnoreCase("card")) {
+                	if(perm.playerHas(player, "vaultslots.card")) {
+                		player.sendMessage(deck.drawCard());
                 	}
                 }
 			} else if(args.length == 2) {
