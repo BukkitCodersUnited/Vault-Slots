@@ -18,7 +18,7 @@ public class VaultSlots extends JavaPlugin{
 	private FileConfiguration config;
 	private final SignChange signchanger = new SignChange(this);
 	private final PlayerUse interact = new PlayerUse(this);
-	private CommandEx myExecutor;
+	public CommandEx myExecutor;
 	public Deck deck;
 	public Permission permission = null;
     public Economy economy = null;

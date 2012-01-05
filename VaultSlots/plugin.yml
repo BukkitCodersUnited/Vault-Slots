@@ -1,8 +1,8 @@
 name: VaultSlots
 main: me.sirtyler.VaultSlots.VaultSlots
-version: 1.4
+version: 1.5
 description: >
-             Vault Slots-A simple to use Slot Machine Plugin
+             Vault Slots-A simple to use Slot Machine Plugin.
 depend: [Vault]
 commands:
   slots:
@@ -20,11 +20,12 @@ permissions:
             vaultslots.access: true
             vaultslots.build: true
             vaultslots.card: true
+            vaultslots.blackjack.access: true
     vaultslots.test:
         description: Allows for Test Command.
         default: true
     vaultslots.roll:
-        description: Allows for Roll Command.
+        description: Allows for Rolling a Random Number from 1 to 4.
         default: true
     vaultslots.access:
         description: Allows for Using Slots.
@@ -33,5 +34,8 @@ permissions:
         description: Allows for Building Slots.
         default: op
     vaultslots.card:
-        description: Allows to pull a random card.
+        description: Allows to Pull a Random Card from a Deck.
+        default: true
+    vaultslots.blackjack.access:
+        description: Allows access to Blackjack Games.
         default: true
