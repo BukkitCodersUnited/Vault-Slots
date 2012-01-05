@@ -19,6 +19,7 @@ public class VaultSlots extends JavaPlugin{
 	private final SignChange signchanger = new SignChange(this);
 	private final PlayerUse interact = new PlayerUse(this);
 	private CommandEx myExecutor;
+	public Deck deck;
 	public Permission permission = null;
     public Economy economy = null;
 
@@ -34,6 +35,7 @@ public class VaultSlots extends JavaPlugin{
 
 	@Override
 	public void onEnable() {
+		deck = new Deck(this);
 		myExecutor = new CommandEx(this);
 		PluginManager pm = getServer().getPluginManager();
 		PluginDescriptionFile pdfFile = this.getDescription();
