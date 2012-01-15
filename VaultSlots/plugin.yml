@@ -1,6 +1,6 @@
 name: VaultSlots
 main: me.sirtyler.VaultSlots.VaultSlots
-version: 1.5
+version: 1.6
 description: >
              Vault Slots-A simple to use Slot Machine Plugin.
 depend: [Vault]

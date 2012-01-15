@@ -18,18 +18,23 @@ public class CommandEx implements CommandExecutor{
 	private static Permission perm;
 	public Map<String, Boolean> blackjack = new HashMap<String, Boolean>();
 	Random rand = new Random();
+	private boolean useDebug = false;
+	private static Log logger;
 	public CommandEx(VaultSlots instance) {
 		plugin = instance;
-		deck = instance.deck;
+		deck = plugin.deck;
+		logger = plugin.log;
 	}
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		useDebug = plugin.inDebug;
 		perm = plugin.permission;
 		if (sender instanceof Player) {
 			Player player = (Player) sender;
 			if(args.length == 1){
                 String cmd = args[0].toString();
                 if(cmd.equalsIgnoreCase("help")) {
+            		if(useDebug) logger.sendDebugInfo("Command Sender:" + player.getName() + " Command: " + cmd + " Command Length:" + args.length);
                 	player.sendMessage(ChatColor.BLUE + "[VaultSlot Help Guide] #Page 1#");
 					player.sendMessage(ChatColor.GOLD + "Originaly Created for The Vault RP Server!");
 					player.sendMessage(ChatColor.GREEN + "/slots or /vs");
@@ -41,6 +46,7 @@ public class CommandEx implements CommandExecutor{
 					return true;
                 } else if(cmd.equalsIgnoreCase("test")){
                 	if(perm.playerHas(player, "vaultslots.test")) {
+                		if(useDebug) logger.sendDebugInfo("Command Sender:" + player.getName() + " Command: " + cmd + " Command Length:" + args.length);
                 		sender.sendMessage(ChatColor.GOLD + "[VaultSlots] is Working!");
                 		return true;
                 	}else {
@@ -49,15 +55,17 @@ public class CommandEx implements CommandExecutor{
             		}
                 } else if(cmd.equalsIgnoreCase("roll")){
                 	 if(perm.playerHas(player, "vaultslots.roll")) {
-                		int pickedNumber = rand.nextInt(4) + 1;
-                		sender.sendMessage(ChatColor.GREEN + "" + pickedNumber);
-                		return true;
+                 		if(useDebug) logger.sendDebugInfo("Command Sender:" + player.getName() + " Command: " + cmd + " Command Length:" + args.length);
+                		 int pickedNumber = rand.nextInt(4) + 1;
+                		 sender.sendMessage(ChatColor.GREEN + "" + pickedNumber);
+                		 return true;
                 	} else {
             			sender.sendMessage(ChatColor.RED + "[VaultSlots]: You Do Not Have Permission for That.");
             			return true;
                 	}
                 } else if(cmd.equalsIgnoreCase("card")) {
                 	if(perm.playerHas(player, "vaultslots.card")) {
+                		if(useDebug) logger.sendDebugInfo("Command Sender:" + player.getName() + " Command: " + cmd + " Command Length:" + args.length);
                 		player.sendMessage(ChatColor.GOLD + deck.drawCard());
                 		return true;
                 	} else {
@@ -66,6 +74,7 @@ public class CommandEx implements CommandExecutor{
                 	}
                 } else if(cmd.equalsIgnoreCase("blackjack")) {
 					if(perm.playerHas(player, "vaultslots.blackjack.access")) {
+                		if(useDebug) logger.sendDebugInfo("Command Sender:" + player.getName() + " Command: " + cmd + " Command Length:" + args.length);
 						if(blackjack.containsKey(player.getName())) {
 							player.sendMessage(ChatColor.BLUE + "You are already in a game.");
 						} else {
@@ -82,6 +91,7 @@ public class CommandEx implements CommandExecutor{
 					} 
                 }else if(cmd.equalsIgnoreCase("hit")) {
                 	if(perm.playerHas(player, "vaultslots.blackjack.access")) {
+                		if(useDebug) logger.sendDebugInfo("Command Sender:" + player.getName() + " Command: " + cmd + " Command Length:" + args.length);
                 		if(blackjack.containsKey(player.getName())) {
                 			deck.BlackJack(player, "hit");
                 			return true;
@@ -95,6 +105,7 @@ public class CommandEx implements CommandExecutor{
                 	}
                 } else if(cmd.equalsIgnoreCase("stay")) {
                 	if(perm.playerHas(player, "vaultslots.blackjack.access")) {
+                		if(useDebug) logger.sendDebugInfo("Command Sender:" + player.getName() + " Command: " + cmd + " Command Length:" + args.length);
                 		if(blackjack.containsKey(player.getName())) {
                 			deck.BlackJack(player, "stay");
                 			return true;
@@ -112,6 +123,7 @@ public class CommandEx implements CommandExecutor{
 				String arg = args[1].toString();
 				if(cmd.equalsIgnoreCase("help")) {
 					if(arg.equalsIgnoreCase("1")) {
+						if(useDebug) logger.sendDebugInfo("Command Sender:" + player.getName() + " Command: " + cmd + " " + arg + " Command Length:" + args.length);
 						player.sendMessage(ChatColor.BLUE + "[VaultSlot Help Guide] #Page 1#");
 						player.sendMessage(ChatColor.GOLD + "Originaly Created for The Vault RP Server!");
 						player.sendMessage(ChatColor.GREEN + "/slots or /vs");
@@ -122,6 +134,7 @@ public class CommandEx implements CommandExecutor{
 						player.sendMessage(ChatColor.GREEN + "/slots blackjack <bet> - Play a game of Blackjack with bet, the default is $10.");
 						return true;
 					} else if(arg.equalsIgnoreCase("2")) {
+						if(useDebug) logger.sendDebugInfo("Command Sender:" + player.getName() + " Command: " + cmd + " " + arg + " Command Length:" + args.length);
 						player.sendMessage(ChatColor.BLUE + "[VaultSlot Help Guide] #Page 2#");
 						player.sendMessage(ChatColor.GOLD + "Originaly Created for The Vault RP Server!");
 						player.sendMessage(ChatColor.GREEN + "/slots hit - Used in a game of Blackjack to hit.");
@@ -136,6 +149,7 @@ public class CommandEx implements CommandExecutor{
 					}
 				} else if(cmd.equalsIgnoreCase("blackjack")) {
 					if(perm.playerHas(player, "vaultslots.blackjack.access")) {
+						if(useDebug) logger.sendDebugInfo("Command Sender:" + player.getName() + " Command: " + cmd + " " + arg + " Command Length:" + args.length);
 						if(blackjack.containsKey(player.getName())) {
 							player.sendMessage(ChatColor.BLUE + "You are already in a game.");
 						} else {
@@ -157,6 +171,7 @@ public class CommandEx implements CommandExecutor{
 					}
 				}
 			} else {
+				if(useDebug) logger.sendDebugInfo("Command Sender:" + player.getName() + " Command Length :" + args.length);
 				sender.sendMessage(ChatColor.RED + "[VaultSlots] expected a command.");
 				sender.sendMessage(ChatColor.RED + "[VaultSlots] Use /slots help to see Commands and Sign Format.");
 				return true;

@@ -20,9 +20,10 @@ public class VaultSlots extends JavaPlugin{
 	private final PlayerUse interact = new PlayerUse(this);
 	public CommandEx myExecutor;
 	public Deck deck;
+	public Log log;
 	public Permission permission = null;
     public Economy economy = null;
-
+    public boolean inDebug = false;
 	public VaultSlots() {
 		super();
 	}
@@ -30,12 +31,14 @@ public class VaultSlots extends JavaPlugin{
 	@Override
 	public void onDisable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
-		this.logger.info("[" + pdfFile.getName() + "]" + " version-" + pdfFile.getVersion() + " is now Disabled.");	
+		if(log.sendInfo("[" + pdfFile.getName() + "]" + " version-" + pdfFile.getVersion() + " is now Disabled.")) return;
+		this.logger.info("[" + pdfFile.getName() + "]" + " version-" + pdfFile.getVersion() + " is now Disabled.");
 	}
 
 	@Override
 	public void onEnable() {
 		deck = new Deck(this);
+		log = new Log(this);
 		myExecutor = new CommandEx(this);
 		PluginManager pm = getServer().getPluginManager();
 		PluginDescriptionFile pdfFile = this.getDescription();
@@ -44,21 +47,31 @@ public class VaultSlots extends JavaPlugin{
 		pm.registerEvent(Event.Type.SIGN_CHANGE, this.signchanger, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_INTERACT, this.interact, Event.Priority.Highest, this);
 		checkConfig();
+		checkDebug();
 		getCommand("slots").setExecutor(myExecutor);
 		getCommand("vs").setExecutor(myExecutor);
+		if(log.sendInfo("version-" + pdfFile.getVersion() + " is now Enabled.")) return;
 		this.logger.info("[" + pdfFile.getName() + "]" + " version-" + pdfFile.getVersion() + " is now Enabled.");
 	}
-
 	private void checkConfig() {
 		try{
 			config = this.getConfig();
 			config.options().copyDefaults(true);
 			this.saveConfig();
 		}catch(Exception e){
+			if(log.sendExceptionInfo(e)) return;
 			e.printStackTrace();
 		}
 	}
-	
+	private void checkDebug() {
+		try {
+			config.getBoolean("debug", true);
+			inDebug = true;
+		} catch(Exception e){
+			if(log.sendExceptionInfo(e)) return;
+			e.printStackTrace();
+		}
+	}
     private Boolean setupPermissions(){
         RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
         if (permissionProvider != null) {

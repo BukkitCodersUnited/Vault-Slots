@@ -18,14 +18,19 @@ public class Deck {
 	Random rand = new Random();
 	private Map<String, String> score = new HashMap<String, String>();
 	private Map<String, Integer> bets = new HashMap<String, Integer>();
+	private boolean useDebug = false;
+	private static Log logger;
 	public Deck(VaultSlots instance) {
 		plugin = instance;
+		logger = plugin.log;
 	}
 	public String drawCard() {
+		if(useDebug) logger.sendDebugInfo("Drawing Card");
 		String card = null;
 		int rnd1 = rand.nextInt(cards.length);
 		int rnd2 = rand.nextInt(suits.length);
 		card = (cards[rnd1] + " of " + suits[rnd2]);
+		if(useDebug) logger.sendDebugInfo("Drew Card:" + card);
 		return card;	
 	}
 	public void BlackJack(Player p, String play) {
@@ -40,10 +45,12 @@ public class Deck {
 				points = 0;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			if(logger.sendExceptionInfo(e)) return;
+			plugin.logger.info("[VaultSlots] Exception: " + e);
 			points = 0;
 		}
 		if(play.equalsIgnoreCase("hit")) {
+			if(useDebug) logger.sendDebugInfo("Hit: " + player.getName());
 			if(card2.equals("Ace")) {
 				if((points + 11) <= 21) {
 					points += 11;
@@ -58,10 +65,12 @@ public class Deck {
 			try {
 				score.put(player.getName(), ("" +points));
 			} catch (Exception e) {
-				e.printStackTrace();
+				if(logger.sendExceptionInfo(e)) return;
+				plugin.logger.info("[VaultSlots] Exception: " + e);
 			}
 			player.sendMessage(ChatColor.GREEN + "You got a " + card + " and your score is now " + points);
 		} else if(play.equalsIgnoreCase("stay")) {
+			if(useDebug) logger.sendDebugInfo("Stay: " + player.getName());
 			player.sendMessage(ChatColor.GREEN +"You stay with a score of " + points);
 			int i = BlackJackAuto();
 			player.sendMessage(ChatColor.GRAY + "Dealer gets a score of " + i);
