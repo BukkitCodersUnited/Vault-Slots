@@ -22,9 +22,9 @@ public class Deck {
 	private static Log logger;
 	public Deck(VaultSlots instance) {
 		plugin = instance;
-		logger = plugin.log;
 	}
 	public String drawCard() {
+		logger = plugin.log;
 		if(useDebug) logger.sendDebugInfo("Drawing Card");
 		String card = null;
 		int rnd1 = rand.nextInt(cards.length);
@@ -34,6 +34,7 @@ public class Deck {
 		return card;	
 	}
 	public void BlackJack(Player p, String play) {
+		logger = plugin.log;
 		Player player = p;
 		String card = drawCard();
 		String card2 = card.split(" of ")[0];
@@ -104,6 +105,7 @@ public class Deck {
 		return;
 	}
 	public int BlackJackAuto() {
+		logger = plugin.log;
 		String card = drawCard();
 		String card2 = card.split(" of ")[0];
 		int points = 0;
@@ -131,17 +133,20 @@ public class Deck {
 		 }	
 	}
 	public void clearScore(Player p) {
+		logger = plugin.log;
 		cmdEx.blackjack.remove(p.getName());
 		bets.remove(p.getName());
 		score.remove(p.getName());
 	}
 	public void setGame(Player p, int bet) {
+		logger = plugin.log;
 		eco = plugin.economy;
 		cmdEx = plugin.myExecutor;
 		bets.put(p.getName(), bet);
 		bet(p);
 	}
 	public void bet(Player p) {
+		logger = plugin.log;
 		int bet = bets.get(p.getName());
 		if(eco.getBalance(p.getName()) >= bet) {
 			eco.withdrawPlayer(p.getName(), bet);
@@ -149,12 +154,14 @@ public class Deck {
 		}
 	}
 	public void win(Player p) {
+		logger = plugin.log;
 		int bet = (bets.get(p.getName()) * 2);
 		p.sendMessage(ChatColor.GOLD + "You win $" + bet);
 		eco.depositPlayer(p.getName(), bet);
 		
 	}
 	public void winDouble(Player p) {
+		logger = plugin.log;
 		int bet = (bets.get(p.getName()) * 4);
 		p.sendMessage(ChatColor.GOLD + "You win $" + bet);
 		eco.depositPlayer(p.getName(), bet);

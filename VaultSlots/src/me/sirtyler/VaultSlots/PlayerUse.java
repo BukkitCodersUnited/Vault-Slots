@@ -27,10 +27,10 @@ public class PlayerUse extends PlayerListener{
 		private static Log logger;
 		public PlayerUse(VaultSlots instance) {
 			plugin = instance;
-			logger = plugin.log;
 		}
 		@SuppressWarnings("deprecation")
 		public void onPlayerInteract(PlayerInteractEvent event) { 
+			logger = plugin.log;
 			useDebug = plugin.inDebug;
 			Player player = event.getPlayer();
 			config = plugin.getConfig();

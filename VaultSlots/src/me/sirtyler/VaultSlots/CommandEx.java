@@ -23,10 +23,10 @@ public class CommandEx implements CommandExecutor{
 	public CommandEx(VaultSlots instance) {
 		plugin = instance;
 		deck = plugin.deck;
-		logger = plugin.log;
 	}
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		logger = plugin.log;
 		useDebug = plugin.inDebug;
 		perm = plugin.permission;
 		if (sender instanceof Player) {

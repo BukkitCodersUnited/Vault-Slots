@@ -14,10 +14,10 @@ public class SignChange extends BlockListener{
 	private static Log logger;
 	public SignChange(VaultSlots instance) {
 		plugin = instance;
-		logger = plugin.log;
 	}
 	
 	public void onSignChange(SignChangeEvent event) {
+		logger = plugin.log;
 		perm = plugin.permission;
 		Player player = event.getPlayer();
 		if(useDebug) logger.sendDebugInfo("Sign Maker:" + player.getName() + " Checking Permission");
