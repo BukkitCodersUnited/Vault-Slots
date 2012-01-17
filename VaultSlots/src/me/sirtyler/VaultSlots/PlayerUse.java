@@ -1,6 +1,5 @@
 package me.sirtyler.VaultSlots;
 
-import java.util.HashMap;
 import java.util.Random;
 
 import net.milkbowl.vault.economy.Economy;
@@ -144,7 +143,7 @@ public class PlayerUse extends PlayerListener{
 										if(useDebug) logger.sendDebugInfo("Sign User:" + player.getName() + " Use econ?:false");
 										ItemStack costing = new ItemStack(new ItemStack(costItm).getType(),costNum);
 										if(useDebug) logger.sendDebugInfo("Sign User:" + player.getName() + " Checking Inventory for:" + costing);
-										if(checkInv(player,costing)) {
+										if(player.getInventory().contains(costing)) {
 											if(useDebug) logger.sendDebugInfo("Sign User:" + player.getName() + " Check true");
 											costing.setDurability(costDur);
 											if(useDebug) logger.sendDebugInfo("Sign User:" + player.getName() + " Removing:" + costing);
@@ -254,13 +253,5 @@ public class PlayerUse extends PlayerListener{
 					}
 				}
 			}
-		}
-		private boolean checkInv(Player player, ItemStack itm) {
-			Material mat = itm.getType();
-			Inventory inv = player.getInventory();
-			HashMap<Integer, ? extends ItemStack> test2 = inv.all(mat);
-			if(useDebug) logger.sendDebugInfo("" + test2);
-			if(test2 != null) return true;
-			return false;
 		}
 }
