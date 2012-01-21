@@ -35,6 +35,7 @@ public class VaultSlots extends JavaPlugin{
 		this.logger.info("[" + pdfFile.getName() + "]" + " version-" + pdfFile.getVersion() + " is now Disabled.");
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onEnable() {
 		deck = new Deck(this);
@@ -65,7 +66,7 @@ public class VaultSlots extends JavaPlugin{
 	}
 	private void checkDebug() {
 		try {
-			config.getBoolean("debug", true);
+			config.getBoolean("debug");
 			inDebug = true;
 		} catch(Exception e){
 			if(log.sendExceptionInfo(e)) return;

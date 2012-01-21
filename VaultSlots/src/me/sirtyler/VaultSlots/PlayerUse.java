@@ -17,6 +17,7 @@ import org.bukkit.event.player.PlayerListener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+@SuppressWarnings("deprecation")
 public class PlayerUse extends PlayerListener{
 		public static VaultSlots plugin;
 		private FileConfiguration config; 
@@ -28,7 +29,6 @@ public class PlayerUse extends PlayerListener{
 		public PlayerUse(VaultSlots instance) {
 			plugin = instance;
 		}
-		@SuppressWarnings("deprecation")
 		public void onPlayerInteract(PlayerInteractEvent event) { 
 			logger = plugin.log;
 			useDebug = plugin.inDebug;

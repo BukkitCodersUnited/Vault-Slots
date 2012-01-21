@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockListener;
 import org.bukkit.event.block.SignChangeEvent;
 
+@SuppressWarnings("deprecation")
 public class SignChange extends BlockListener{
 	public static VaultSlots plugin;
 	private static Permission perm;
