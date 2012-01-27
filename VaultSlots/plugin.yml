@@ -39,3 +39,6 @@ permissions:
     vaultslots.blackjack.access:
         description: Allows access to Blackjack Games.
         default: true
+    vaultslots.poker.access:
+        description: Allows access to Blackjack Games.
+        default: true
