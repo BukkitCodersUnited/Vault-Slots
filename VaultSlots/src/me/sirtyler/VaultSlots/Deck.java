@@ -166,4 +166,15 @@ public class Deck {
 		p.sendMessage(ChatColor.GOLD + "You win $" + bet);
 		eco.depositPlayer(p.getName(), bet);
 	}
+	public void Poker(Player p) {
+		logger = plugin.log;
+		Player player = p;
+		String card1 = drawCard();
+		String card2 = drawCard();
+		String card3 = drawCard();
+		String card4 = drawCard();
+		String card5 = drawCard();
+		player.sendMessage(ChatColor.GREEN + "You got a Hand of:");
+		player.sendMessage(ChatColor.GOLD + card1 + ", " + card2 + ", " + card3 + ", " + card4 + ", " + card5);
+	}
 }

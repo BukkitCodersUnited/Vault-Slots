@@ -72,8 +72,16 @@ public class CommandEx implements CommandExecutor{
                 		sender.sendMessage(ChatColor.RED + "[VaultSlots]: You Do Not Have Permission for That.");
             			return true;
                 	}
+                } else if(cmd.equalsIgnoreCase("poker")) {
+                	if(perm.playerHas(player, "vaultslots.poker.access")) {
+                		player.sendMessage(ChatColor.GRAY + "Multiplayer Poker coming soon");
+                		if(useDebug) logger.sendDebugInfo("Command Sender:" + player.getName() + " Command: " + cmd + " Command Length:" + args.length);
+                		deck.Poker(player);
+                		return true;
+                	}
                 } else if(cmd.equalsIgnoreCase("blackjack")) {
 					if(perm.playerHas(player, "vaultslots.blackjack.access")) {
+						player.sendMessage(ChatColor.GRAY + "Multiplayer Blackjack coming soon");
                 		if(useDebug) logger.sendDebugInfo("Command Sender:" + player.getName() + " Command: " + cmd + " Command Length:" + args.length);
 						if(blackjack.containsKey(player.getName())) {
 							player.sendMessage(ChatColor.BLUE + "You are already in a game.");
@@ -89,7 +97,7 @@ public class CommandEx implements CommandExecutor{
 						}
 						return true;
 					} 
-                }else if(cmd.equalsIgnoreCase("hit")) {
+                } else if(cmd.equalsIgnoreCase("hit")) {
                 	if(perm.playerHas(player, "vaultslots.blackjack.access")) {
                 		if(useDebug) logger.sendDebugInfo("Command Sender:" + player.getName() + " Command: " + cmd + " Command Length:" + args.length);
                 		if(blackjack.containsKey(player.getName())) {
@@ -139,6 +147,7 @@ public class CommandEx implements CommandExecutor{
 						player.sendMessage(ChatColor.GOLD + "Originaly Created for The Vault RP Server!");
 						player.sendMessage(ChatColor.GREEN + "/slots hit - Used in a game of Blackjack to hit.");
 						player.sendMessage(ChatColor.GREEN + "/slots stay - Used in a game of Blackjack to stay.");
+						player.sendMessage(ChatColor.GREEN + "/slots poker - Play a game of Poker (in progress)");
 						player.sendMessage(ChatColor.GREEN + "Slot Machine Format:");
 						player.sendMessage(ChatColor.GREEN + "- Line1: [Slots]");
 						player.sendMessage(ChatColor.GREEN + "- Line2: Type");
