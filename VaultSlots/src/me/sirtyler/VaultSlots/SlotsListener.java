@@ -294,11 +294,15 @@ public class SlotsListener implements Listener{
 			if(list[i-1] != null) {
 				if(useDebug) log.sendDebugInfo("? Got" + list[i-1]);
 				if(useDebug) log.sendDebugInfo("? Costing Stack:" + stack + "Costing Durability:" + stack.getDurability());
-				if(list[i-1].getDurability() == stack.getDurability()) {
-					if(useDebug) log.sendDebugInfo("? Checking Match = True");
-					return true;
-				} else {
-					if(useDebug) log.sendDebugInfo("? Checking Match = False");
+				if(list[i-1].getType() == stack.getType()) {
+					if(list[i-1].getAmount() >= stack.getAmount()) {
+						if(list[i-1].getDurability() == stack.getDurability()) {
+							if(useDebug) log.sendDebugInfo("? Checking Match = True");
+							return true;
+						} else {
+							if(useDebug) log.sendDebugInfo("? Checking Match = False");
+						}
+					}
 				}
 			}
 		}
