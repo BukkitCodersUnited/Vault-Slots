@@ -1,18 +1,16 @@
 package me.sirtyler.VaultSlots;
 
-import java.util.logging.Logger;
+import java.io.File;
 
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class VaultSlots extends JavaPlugin{
 	public static VaultSlots plugin;
-	public final Logger logger = Logger.getLogger("Minecraft");
 	private FileConfiguration config;
 	public CommandEx myExecutor;
 	public Deck deck;
@@ -26,9 +24,7 @@ public class VaultSlots extends JavaPlugin{
 	
 	@Override
 	public void onDisable() {
-		PluginDescriptionFile pdfFile = this.getDescription();
-		if(log.sendInfo("[" + pdfFile.getName() + "]" + " version-" + pdfFile.getVersion() + " is now Disabled.")) return;
-		this.logger.info("[" + pdfFile.getName() + "]" + " version-" + pdfFile.getVersion() + " is now Disabled.");
+		//Disabled
 	}
 
 	@Override
@@ -36,7 +32,6 @@ public class VaultSlots extends JavaPlugin{
 		deck = new Deck(this);
 		log = new Log(this);
 		myExecutor = new CommandEx(this);
-		PluginDescriptionFile pdfFile = this.getDescription();
 		setupPermissions();
 		setupEconomy();
 		getServer().getPluginManager().registerEvents(new SlotsListener(this), this);
@@ -44,17 +39,18 @@ public class VaultSlots extends JavaPlugin{
 		checkDebug();
 		getCommand("slots").setExecutor(myExecutor);
 		getCommand("vs").setExecutor(myExecutor);
-		if(log.sendInfo("version-" + pdfFile.getVersion() + " is now Enabled.")) return;
-		this.logger.info("[" + pdfFile.getName() + "]" + " version-" + pdfFile.getVersion() + " is now Enabled.");
 	}
 	
 	private void checkConfig() {
+		String mainDirectory = ("plugins/" + this.getDescription().getName());
+		File file = new File(mainDirectory + File.separator + "config.yml");
 		try{
 			config = this.getConfig();
-			config.options().copyDefaults(true);
-			this.saveConfig();
+			if(!file.exists()) { 
+				config.options().copyDefaults(true);
+				this.saveConfig();
+			}
 		}catch(Exception e){
-			if(log.sendExceptionInfo(e)) return;
 			e.printStackTrace();
 		}
 	}
