@@ -60,7 +60,6 @@ public class VaultSlots extends JavaPlugin{
 			inDebug = config.getBoolean("debug");
 		} catch(Exception e){
 			if(log.sendExceptionInfo(e)) return;
-			e.printStackTrace();
 		}
 	}
 	
