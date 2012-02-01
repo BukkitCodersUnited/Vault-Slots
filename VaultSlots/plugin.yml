@@ -1,0 +1,33 @@
+name: VaultSlots
+main: me.sirtyler.VaultSlots.VaultSlots
+version: 1.4
+description: >
+             Vault Slots-A simple to use Slot Machine Plugin
+depend: [Vault]
+commands:
+  slots:
+    description: All Slots commands
+    usage: /slots help - Display Help
+  vs:
+    description: Shot Version
+    usage: /vs help - Display Help
+permissions:
+    vaultslots.*:
+        description: Gives total VaultSlots Access
+        children:
+            vaultslots.test: true
+            vaultslots.roll: true
+            vaultslots.access: true
+            vaultslots.build: true
+    vaultslots.test:
+        description: Allows for Test Command.
+        default: op
+    vaultslots.roll:
+        description: Allows for Roll Command.
+        default: op
+    vaultslots.access:
+        description: Allows for Using Slots.
+        default: op
+    vaultslots.build:
+        description: Allows for Building Slots.
+        default: op
