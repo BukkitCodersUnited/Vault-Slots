@@ -9,27 +9,17 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class VaultSlots extends JavaPlugin{
+public class VaultSlots extends JavaPlugin {
 	public static VaultSlots plugin;
 	private FileConfiguration config;
 	public CommandEx myExecutor;
-	public Deck deck;
 	public Log log;
 	public Permission permission = null;
     public Economy economy = null;
-    public boolean inDebug = false;
-	public VaultSlots() {
-		super();
-	}
-	
-	@Override
-	public void onDisable() {
-		//Disabled
-	}
-
-	@Override
+    public boolean debug = false;
+    
+    
 	public void onEnable() {
-		deck = new Deck(this);
 		log = new Log(this);
 		myExecutor = new CommandEx(this);
 		setupPermissions();
@@ -38,7 +28,6 @@ public class VaultSlots extends JavaPlugin{
 		checkConfig();
 		checkDebug();
 		getCommand("slots").setExecutor(myExecutor);
-		getCommand("vs").setExecutor(myExecutor);
 	}
 	
 	private void checkConfig() {
@@ -57,9 +46,9 @@ public class VaultSlots extends JavaPlugin{
 	
 	private void checkDebug() {
 		try {
-			inDebug = config.getBoolean("debug");
+			debug = config.getBoolean("debug");
 		} catch(Exception e){
-			if(log.sendExceptionInfo(e)) return;
+			if(log.info(e)) return;
 		}
 	}
 	

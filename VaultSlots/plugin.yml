@@ -7,25 +7,21 @@ depend: [Vault]
 commands:
   slots:
     description: All Slots commands
-    usage: /slots help - Display Help
-  vs:
-    description: Shot Version
-    usage: /vs help - Display Help
+    aliases: [vs, vaultslots, vslots]
+    usage: /slots help - Display Helps
 permissions:
     vaultslots.*:
-        description: Gives total VaultSlots Access
+        description: Gives total VaultSlots Access.
         children:
-            vaultslots.test: true
-            vaultslots.roll: true
             vaultslots.access: true
             vaultslots.build: true
-            vaultslots.card: true
-            vaultslots.blackjack.access: true
-    vaultslots.test:
-        description: Allows for Test Command.
-        default: true
-    vaultslots.roll:
-        description: Allows for Rolling a Random Number from 1 to 4.
+            vaultslots.commands.*: true
+    vaultslots.commands.*:
+        description: Gives total Command Access.
+        children:
+            vaultslots.commands.help: true
+    vaultslots.commands.help:
+        description: Allows for Help Command.
         default: true
     vaultslots.access:
         description: Allows for Using Slots.
@@ -33,12 +29,3 @@ permissions:
     vaultslots.build:
         description: Allows for Building Slots.
         default: op
-    vaultslots.card:
-        description: Allows to Pull a Random Card from a Deck.
-        default: true
-    vaultslots.blackjack.access:
-        description: Allows access to Blackjack Games.
-        default: true
-    vaultslots.poker.access:
-        description: Allows access to Blackjack Games.
-        default: true
